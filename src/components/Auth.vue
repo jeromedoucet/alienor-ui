@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
-    <div class="login-form well well-lg ">
+    <div class="login">
       <div class="row col-md-4 col-md-offset-4">
         <form name="authForm" class="auth-form">
           <div class="form-group">
-            <label for="identifier">#Username</label>
+            <label for="identifier">#UserIdentifier</label>
             <input type="text" class="form-control" id="identifier" name="identifier"/>
           </div>
           <div class="form-group">
@@ -12,7 +12,7 @@
             <input type="password" class="form-control" id="password" name="password"/>
           </div>
           <div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
           </div>
         </form>
       </div>
@@ -20,13 +20,19 @@
   </div>
 </template>
 <style>
-  .login-form {
-    margin-left: 33.3333%;
-    margin-right: 33.3333%;
+  .login {
     margin-top: 50px;
   }
-  .login-form .auth-form {
-    margin: 5px;
+
+  .login .auth-form {
+    border: .01em solid #e7e7e7;
+    padding: 0.6em 0.6em;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .login .auth-form {
+    box-shadow: 10px 20px 30px #9ad3f3;
   }
 </style>
 <script>
