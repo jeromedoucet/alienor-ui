@@ -1,45 +1,56 @@
 <template>
-  <div class="container-fluid">
-    <div class="login">
-      <div class="row col-md-4 col-md-offset-4">
-        <form name="authForm" class="auth-form">
-          <div class="form-group">
-            <label for="identifier">#UserIdentifier</label>
-            <input type="text" class="form-control" id="identifier" name="identifier"/>
-          </div>
-          <div class="form-group">
-            <label for="password">#Password</label>
-            <input type="password" class="form-control" id="password" name="password"/>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-          </div>
-        </form>
+  <div>
+    <div class="container-fluid">
+      <div class="alia-form-container">
+        <div class="row col-md-4 col-md-offset-4">
+          <form name="auth-form" class="alia-form">
+            <div class="form-group" :class="{'has-error': errors.has('identifier')}">
+              <label for="identifier">#UserIdentifier</label>
+              <input v-validate data-rules="required" type="text"
+                     class="form-control" id="identifier" name="identifier" v-model="credential.login"
+                     placeholder="#UserIdentifierEx"/>
+              <span v-show="errors.has('identifier')" class="help-block">#MandatoryField</span>
+            </div>
+            <div class="form-group" :class="{'has-error': errors.has('password')}">
+              <label for="password">#Password</label>
+              <input v-validate data-rules="required" type="password" class="form-control" id="password" name="password"
+                     v-model="credential.pwd" placeholder="#PasswordEx"/>
+              <span v-show="errors.has('password')" class="help-block">#MandatoryField</span>
+            </div>
+            <div class="form-group" :class="{'has-error': loginError}">
+              <button :disabled="errors.any() || ! (fields.identifier.dirty && fields.password.dirty)" type="button"
+                      class="btn btn-primary btn-block"
+                      @click="login">#Login
+              </button>
+              <span v-show="loginError" class="help-block">{{loginError}}</span>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
-<style>
-  .login {
-    margin-top: 50px;
-  }
-
-  .login .auth-form {
-    border: .01em solid #e7e7e7;
-    padding: 0.6em 0.6em;
-    border-radius: 10px;
-    background-color: white;
-  }
-
-  .login .auth-form {
-    box-shadow: 10px 20px 30px #9ad3f3;
-  }
+<style src="../share/css/form.css">
 </style>
 <script>
   export default{
     data () {
       return {
-        msg: 'hello vue'
+        credential: {},
+        loginError: undefined
+      }
+    },
+    methods: {
+      login: function () { // todo test me
+        this.$http.post('/login', this.credential).then(function (response) {
+          console.log(response.status)
+        }, function (response) {
+          if (response.body.Msg) {
+            this.loginError = response.body.Msg
+          } else {
+            this.loginError = '#UnknowError'
+          }
+        })
       }
     }
   }

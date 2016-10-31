@@ -1,31 +1,32 @@
+<!--todo field check + clear fields ? + form component + more test + do log automatically ?-->
 <template>
   <div>
     <div class="container-fluid">
-      <div class="user-creation">
+      <div class="alia-form-container">
         <div class="row col-md-4 col-md-offset-4 form-container">
-          <form name="user-creation" class="signin-form">
+          <form name="user-creation" class="alia-form">
             <div class="form-group">
               <label for="identifier">#UserIdentifier</label>
-              <input type="text" class="form-control" id="identifier" name="identifier"/>
+              <input type="text" class="form-control" id="identifier" name="identifier" v-model="user.identifier"/>
             </div>
             <div class="form-group">
               <label for="password">#Password</label>
-              <input type="password" class="form-control" id="password" name="password"/>
+              <input type="password" class="form-control" id="password" name="password" v-model="user.password"/>
             </div>
             <div class="form-group">
               <label for="forname">#Forname</label>
-              <input type="text" class="form-control" id="forname" name="forname"/>
+              <input type="text" class="form-control" id="forname" name="forname" v-model="user.forName"/>
             </div>
             <div class="form-group">
               <label for="lastname">#Lastname</label>
-              <input type="text" class="form-control" id="lastname" name="lastname"/>
+              <input type="text" class="form-control" id="lastname" name="lastname" v-model="user.name"/>
             </div>
             <div class="form-group">
               <label for="email">#Email</label>
-              <input type="email" class="form-control" id="email" name="email"/>
+              <input type="email" class="form-control" id="email" name="email" v-model="user.email"/>
             </div>
             <div>
-              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+              <button type="button" class="btn btn-primary btn-block" @click="save">Sign in</button>
             </div>
           </form>
         </div>
@@ -33,28 +34,22 @@
     </div>
   </div>
 </template>
-<style>
-  .user-creation {
-    margin-top: 50px;
-  }
-
-  .user-creation .signin-form {
-    border: .01em solid #e7e7e7;
-    padding: 0.6em 0.6em;
-    border-radius: 10px;
-    background-color: white;
-  }
-
-  .user-creation .signin-form {
-    box-shadow: 10px 20px 30px #9ad3f3;
-  }
-
+<style src="../share/css/form.css">
 </style>
 <script>
   export default{
     data () {
       return {
-        msg: 'hello vue'
+        user: {}
+      }
+    },
+    methods: {
+      save: function () {
+        this.$http.post('/user', this.user).then(function (response) {
+          console.log(response.status)
+        }, function (response) {
+          console.log(response.status)
+        })
       }
     }
   }

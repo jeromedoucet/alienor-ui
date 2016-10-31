@@ -1,0 +1,14 @@
+.alia-form-container {
+  margin-top: 50px;
+}
+
+.alia-form-container .alia-form {
+  border: .01em solid #e7e7e7;
+  padding: 0.6em 0.6em;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.alia-form-container .alia-form {
+  box-shadow: 10px 20px 30px #9ad3f3;
+}
