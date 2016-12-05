@@ -27,14 +27,14 @@ describe('Auth component', () => {
     // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
+    let credential = vm.credential
+    credential.login = 'myIdentifier'
+    credential.password = 'myPassword'
     // registering the success event
     vm.$on('loginSuccess', (res) => {
       expect(res.token).to.equal('123456')
       done()
     })
-    let credential = vm.credential
-    credential.login = 'myIdentifier'
-    credential.password = 'myPassword'
     // fake server configuration
     server.respondWith(
       'POST', '/login',
@@ -55,14 +55,14 @@ describe('Auth component', () => {
     // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
+    let credential = vm.credential
+    credential.login = 'myIdentifier'
+    credential.password = 'myFalsePassword'
     // registering the success event
     vm.$on('loginFailure', () => {
       expect(vm.loginError).to.equal('error cheater !')
       done()
     })
-    let credential = vm.credential
-    credential.login = 'myIdentifier'
-    credential.password = 'myFalsePassword'
     // fake server configuration
     server.respondWith(
       'POST', '/login',
@@ -83,14 +83,14 @@ describe('Auth component', () => {
     // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
+    let credential = vm.credential
+    credential.login = 'myIdentifier'
+    credential.password = 'myFalsePassword'
     // registering the success event
     vm.$on('loginFailure', () => {
       expect(vm.loginError).to.equal('#UnknowError')
       done()
     })
-    let credential = vm.credential
-    credential.login = 'myIdentifier'
-    credential.password = 'myFalsePassword'
     // fake server configuration
     server.respondWith(
       'POST', '/login',

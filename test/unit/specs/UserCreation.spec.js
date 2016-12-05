@@ -29,16 +29,16 @@ describe('User creation component', () => {
     // create vue instance
     let Ctor = Vue.extend(UserCreation)
     let vm = new Ctor().$mount()
-    // registering the success event
-    vm.$on('userCreationSuccess', () => {
-      done()
-    })
     let user = vm.user
     user.identifier = 'lukeSkywalker'
     user.password = 'theForceMayWithYou'
     user.forName = 'luke'
     user.name = 'skywalker'
     user.email = 'luke.skywalker@rogue-squadron.org'
+    // registering the success event
+    vm.$on('userCreationSuccess', () => {
+      done()
+    })
 
     // fake server configuration
     server.respondWith(
@@ -67,17 +67,17 @@ describe('User creation component', () => {
     // create vue instance
     let Ctor = Vue.extend(UserCreation)
     let vm = new Ctor().$mount()
-    // registering the success event
-    vm.$on('userCreationFailure', () => {
-      expect(vm.creationError).to.equal('error cheater !')
-      done()
-    })
     let user = vm.user
     user.identifier = 'lukeSkywalker'
     user.password = 'theForceMayWithYou'
     user.forName = 'luke'
     user.name = 'skywalker'
     user.email = 'luke.skywalker@rogue-squadron.org'
+    // registering the success event
+    vm.$on('userCreationFailure', () => {
+      expect(vm.creationError).to.equal('error cheater !')
+      done()
+    })
 
     // fake server configuration
     server.respondWith(
@@ -102,17 +102,17 @@ describe('User creation component', () => {
     // create vue instance
     let Ctor = Vue.extend(UserCreation)
     let vm = new Ctor().$mount()
-    // registering the success event
-    vm.$on('userCreationFailure', () => {
-      expect(vm.creationError).to.equal('#UnknowError')
-      done()
-    })
     let user = vm.user
     user.identifier = 'lukeSkywalker'
     user.password = 'theForceMayWithYou'
     user.forName = 'luke'
     user.name = 'skywalker'
     user.email = 'luke.skywalker@rogue-squadron.org'
+    // registering the success event
+    vm.$on('userCreationFailure', () => {
+      expect(vm.creationError).to.equal('#UnknowError')
+      done()
+    })
 
     // fake server configuration
     server.respondWith(
