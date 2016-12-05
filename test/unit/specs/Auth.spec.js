@@ -24,6 +24,7 @@ describe('Auth component', () => {
 
   it('should emit loginSuccess event when login is successful', done => {
     // given
+    // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
     // registering the success event
@@ -51,6 +52,7 @@ describe('Auth component', () => {
 
   it('should emit loginFailure event when login is rejected with error msg', done => {
     // given
+    // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
     // registering the success event
@@ -78,6 +80,7 @@ describe('Auth component', () => {
 
   it('should emit loginFailure event when login is rejected without error msg', done => {
     // given
+    // vue instanciation
     let Ctor = Vue.extend(Auth)
     let vm = new Ctor().$mount()
     // registering the success event

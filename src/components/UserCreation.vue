@@ -40,15 +40,21 @@
   export default{
     data () {
       return {
-        user: {}
+        user: {},
+        creationError: undefined
       }
     },
     methods: {
       save: function () {
-        return this.$http.post('/user', this.user).then(function (response) {
-          console.log(response.status)
-        }, function (response) {
-          console.log(response.status)
+        return this.$http.post('/user', this.user).then(response => {
+          this.$emit('userCreationSuccess')
+        }, response => {
+          if (response.body.msg) {
+            this.creationError = response.body.msg
+          } else {
+            this.creationError = '#UnknowError'
+          }
+          this.$emit('userCreationFailure')
         })
       }
     }
