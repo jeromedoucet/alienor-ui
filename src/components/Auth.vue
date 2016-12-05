@@ -45,11 +45,7 @@
         return this.$http.post('/login', this.credential).then(response => {
           this.$emit('loginSuccess', response.body)
         }, response => {
-          if (response.body.msg) {
-            this.loginError = response.body.msg
-          } else {
-            this.loginError = '#UnknowError'
-          }
+          this.loginError = response.body.msg ? response.body.msg : '#UnknowError'
           this.$emit('loginFailure')
         })
       }

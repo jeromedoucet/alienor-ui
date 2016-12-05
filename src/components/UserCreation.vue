@@ -49,11 +49,7 @@
         return this.$http.post('/user', this.user).then(response => {
           this.$emit('userCreationSuccess')
         }, response => {
-          if (response.body.msg) {
-            this.creationError = response.body.msg
-          } else {
-            this.creationError = '#UnknowError'
-          }
+          this.creationError = response.body.msg ? response.body.msg : '#UnknowError'
           this.$emit('userCreationFailure')
         })
       }
