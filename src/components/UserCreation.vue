@@ -45,7 +45,7 @@
     },
     methods: {
       save: function () {
-        this.$http.post('/user', this.user).then(function (response) {
+        return this.$http.post('/user', this.user).then(function (response) {
           console.log(response.status)
         }, function (response) {
           console.log(response.status)

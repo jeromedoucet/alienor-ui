@@ -4,21 +4,21 @@
       <div class="alia-form-container">
         <div class="row col-md-4 col-md-offset-4">
           <form name="auth-form" class="alia-form">
-            <div class="form-group" :class="{'has-error': errors.has('identifier')}">
+            <div class="form-group">
               <label for="identifier">#UserIdentifier</label>
-              <input v-validate data-rules="required" type="text"
-                     class="form-control" id="identifier" name="identifier" v-model="credential.login"
-                     placeholder="#UserIdentifierEx"/>
-              <span v-show="errors.has('identifier')" class="help-block">#MandatoryField</span>
+              <input data-rules="required" type="text"
+                     class="form-control" id="identifier" name="identifier"
+                     v-model="credential.login" placeholder="#UserIdentifierEx"/>
+              <span v-show="false" class="help-block">#MandatoryField</span>
             </div>
-            <div class="form-group" :class="{'has-error': errors.has('password')}">
+            <div class="form-group">
               <label for="password">#Password</label>
-              <input v-validate data-rules="required" type="password" class="form-control" id="password" name="password"
+              <input data-rules="required" type="password" class="form-control" id="password" name="password"
                      v-model="credential.pwd" placeholder="#PasswordEx"/>
-              <span v-show="errors.has('password')" class="help-block">#MandatoryField</span>
+              <span v-show="false" class="help-block">#MandatoryField</span>
             </div>
-            <div class="form-group" :class="{'has-error': loginError}">
-              <button :disabled="errors.any() || ! (fields.identifier.dirty && fields.password.dirty)" type="button"
+            <div class="form-group">
+              <button type="button"
                       class="btn btn-primary btn-block"
                       @click="login">#Login
               </button>
@@ -41,17 +41,19 @@
       }
     },
     methods: {
-      login: function () { // todo test me
-        this.$http.post('/login', this.credential).then(function (response) {
-          console.log(response.status)
-        }, function (response) {
-          if (response.body.Msg) {
-            this.loginError = response.body.Msg
+      login: function () {
+        return this.$http.post('/login', this.credential).then(response => {
+          this.$emit('loginSuccess', response.body)
+        }, response => {
+          if (response.body.msg) {
+            this.loginError = response.body.msg
           } else {
             this.loginError = '#UnknowError'
           }
+          this.$emit('loginFailure')
         })
       }
     }
   }
+
 </script>
