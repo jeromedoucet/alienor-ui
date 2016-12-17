@@ -8,8 +8,8 @@
           </router-link>
         </div>
         <div class="nav navbar-nav navbar-right">
-          <router-link class="navbar-text" :to="{ name: 'sign-in'}">#Signin</router-link>
-          <router-link class="navbar-text" :to="{ name: 'authentication'}">#Authentication</router-link>
+          <router-link class="navbar-text" id="navbar-link-sign-in" :to="{ name: 'sign-in'}">#Signin</router-link>
+          <router-link class="navbar-text" id="navbar-link-authentication" :to="{ name: 'authentication'}">#Authentication</router-link>
         </div>
       </div>
     </nav>
