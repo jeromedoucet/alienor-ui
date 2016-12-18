@@ -43,7 +43,7 @@
     methods: {
       login: function () {
         return this.$http.post('/login', this.credential).then(response => {
-          this.$emit('loginSuccess', response.body)
+          this.$emit('loginSuccess')
         }, response => {
           this.loginError = response.body.msg ? response.body.msg : '#UnknowError'
           this.$emit('loginFailure')

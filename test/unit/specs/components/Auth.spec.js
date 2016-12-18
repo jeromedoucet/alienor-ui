@@ -31,8 +31,7 @@ describe('Auth component', () => {
     credential.login = 'myIdentifier'
     credential.password = 'myPassword'
     // registering the success event
-    vm.$on('loginSuccess', (res) => {
-      expect(res.token).to.equal('123456')
+    vm.$on('loginSuccess', () => {
       done()
     })
     // fake server configuration
